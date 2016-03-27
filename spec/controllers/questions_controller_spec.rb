@@ -98,6 +98,16 @@ RSpec.describe QuestionsController, type: :controller do
 		end
 
 		context 'invalid attributes' do
+			before { patch :update, id: question, question: { title: 'new title', body: nil } }
+			it 'does not change question attributes' do
+				question.reload
+				expect(question.title).to eq 'Good title for Question'
+				expect(question.body).to eq 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
+			end
+
+			it 're-renders new view' do
+				expect(response).to render_template :edit
+			end
 		end
 	end
 end
