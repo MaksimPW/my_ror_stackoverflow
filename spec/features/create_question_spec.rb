@@ -5,13 +5,10 @@ feature 'Create question', %q{
   I want to be able to ask questions
 } do
 
-  scenario 'Auth user creates question' do
-    User.create!(email: 'user@test.com', password: '1234567890')
+  given(:user) { create(:user) }
 
-    visit new_user_session_path
-    fill_in 'Email', with: 'user@test.com'
-    fill_in 'Password', with: '1234567890'
-    click_on 'Log in'
+  scenario 'Auth user creates question' do
+    sign_in(user)
 
     visit questions_path
     click_on 'Ask question'
