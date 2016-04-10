@@ -19,7 +19,7 @@ feature 'Create question', %q{
     expect(page).to have_content 'Your question successfully created'
   end
 
-  scenario 'Auth user creates question' do
+  scenario 'UnAuth user creates question' do
     visit questions_path
     click_on 'Ask question'
 
