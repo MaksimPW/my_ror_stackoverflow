@@ -6,7 +6,8 @@ class AnswersController < ApplicationController
 	end
 
   def create
-    @answer = @question.answers.new(answer_params)
+
+    @answer = @question.answers.build(answer_params.merge(question_id: @question_id))
     if @answer.save
       redirect_to @question
     else
